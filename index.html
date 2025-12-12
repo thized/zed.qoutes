@@ -1,0 +1,1394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>zed.qoutes</title>
+<link rel="shortcut icon" href="zed.png" type="image/x-icon">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #3b82f6;
+            --primary-dark: #2563eb;
+            --secondary: #8b5cf6;
+            --accent: #ec4899;
+            --bg-light: #f9fafb;
+            --bg-white: #ffffff;
+            --text-dark: #111827;
+            --text-gray: #6b7280;
+            --border: #e5e7eb;
+            --shadow: rgba(0, 0, 0, 0.1);
+            --gradient: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+        }
+
+        [data-theme="dark"] {
+            --bg-light: #0f172a;
+            --bg-white: #1e293b;
+            --text-dark: #f1f5f9;
+            --text-gray: #94a3b8;
+            --border: #334155;
+            --shadow: rgba(0, 0, 0, 0.3);
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: var(--bg-light);
+            color: var(--text-dark);
+            line-height: 1.6;
+            transition: all 0.3s ease;
+            overflow-x: hidden;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateX(-30px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        @keyframes scaleIn {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            25% { transform: scale(1.3); }
+            50% { transform: scale(1); }
+        }
+
+        /* Navbar */
+        nav {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
+            transition: all 0.3s ease;
+        }
+
+        [data-theme="dark"] nav {
+            background: rgba(15, 23, 42, 0.8);
+        }
+
+        .nav-container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 1rem 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            animation: slideIn 0.6s ease;
+        }
+
+        .logo-icon {
+            font-size: 2rem;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .logo-text h1 {
+            font-size: 1.75rem;
+            font-weight: 800;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .logo-text p {
+            font-size: 0.75rem;
+            color: var(--text-gray);
+        }
+
+        .nav-actions {
+            display: flex;
+            gap: 0.75rem;
+        }
+
+        .nav-btn {
+            padding: 0.625rem;
+            background: transparent;
+            border: none;
+            border-radius: 0.75rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            color: var(--text-dark);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .nav-btn:hover {
+            background: var(--bg-white);
+            transform: scale(1.1);
+        }
+
+        /* Hero Section */
+        .hero {
+            position: relative;
+            padding: 5rem 1.5rem;
+            text-align: center;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at 30% 50%, rgba(59, 130, 246, 0.1) 0%, transparent 50%),
+                        radial-gradient(circle at 70% 50%, rgba(139, 92, 246, 0.1) 0%, transparent 50%);
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .hero h2 {
+            font-size: clamp(2.5rem, 8vw, 4.5rem);
+            font-weight: 900;
+            margin-bottom: 1.5rem;
+            animation: fadeIn 0.8s ease;
+        }
+
+        .hero-gradient {
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero p {
+            font-size: clamp(1.125rem, 3vw, 1.5rem);
+            color: var(--text-gray);
+            margin-bottom: 2.5rem;
+            animation: fadeIn 1s ease;
+        }
+
+        /* Search Bar */
+        .search-container {
+            position: relative;
+            max-width: 700px;
+            margin: 0 auto 2rem;
+            animation: scaleIn 1.2s ease;
+        }
+
+        .search-wrapper {
+            background: var(--bg-white);
+            border-radius: 1.5rem;
+            padding: 0.5rem;
+            box-shadow: 0 20px 60px var(--shadow);
+            transition: all 0.3s ease;
+        }
+
+        .search-wrapper:focus-within {
+            box-shadow: 0 20px 80px rgba(59, 130, 246, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 1.25rem 1.25rem 1.25rem 3.5rem;
+            border: none;
+            border-radius: 1rem;
+            font-size: 1.125rem;
+            background: transparent;
+            color: var(--text-dark);
+            outline: none;
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 1.5rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-gray);
+            pointer-events: none;
+        }
+
+        .random-btn {
+            margin-top: 1.5rem;
+            padding: 1rem 2.5rem;
+            background: var(--gradient);
+            color: white;
+            border: none;
+            border-radius: 1rem;
+            font-size: 1.125rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(59, 130, 246, 0.3);
+        }
+
+        .random-btn:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 15px 40px rgba(59, 130, 246, 0.4);
+        }
+
+        /* Category Filters */
+        .filters {
+            max-width: 1280px;
+            margin: 0 auto 3rem;
+            padding: 0 1.5rem;
+        }
+
+        .filter-box {
+            background: var(--bg-white);
+            border-radius: 1.5rem;
+            padding: 2rem;
+            box-shadow: 0 10px 40px var(--shadow);
+            animation: scaleIn 0.6s ease;
+        }
+
+        .filter-box h3 {
+            font-size: 1.25rem;
+            margin-bottom: 1.25rem;
+            font-weight: 700;
+        }
+
+        .category-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.875rem;
+        }
+
+        .category-btn {
+            padding: 0.75rem 1.75rem;
+            border: none;
+            border-radius: 1rem;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: var(--bg-light);
+            color: var(--text-dark);
+        }
+
+        .category-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px var(--shadow);
+        }
+
+        .category-btn.active {
+            background: var(--gradient);
+            color: white;
+            transform: scale(1.05);
+            box-shadow: 0 8px 25px rgba(59, 130, 246, 0.4);
+        }
+
+        /* Sections */
+        .section {
+            max-width: 1280px;
+            margin: 0 auto 5rem;
+            padding: 0 1.5rem;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 2.5rem;
+            animation: slideIn 0.6s ease;
+        }
+
+        .section-icon {
+            font-size: 2.5rem;
+        }
+
+        .section-header h2 {
+            font-size: clamp(1.875rem, 5vw, 2.5rem);
+            font-weight: 800;
+        }
+
+        /* Quote Cards Grid */
+        .quotes-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .quote-card {
+            position: relative;
+            background: var(--bg-white);
+            border-radius: 1.5rem;
+            padding: 2rem;
+            box-shadow: 0 10px 40px var(--shadow);
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            animation: fadeIn 0.6s ease;
+            overflow: hidden;
+        }
+
+        .quote-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: var(--gradient);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .quote-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 20px 60px rgba(59, 130, 246, 0.3);
+        }
+
+        .quote-card:hover::before {
+            opacity: 0.05;
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1.25rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .category-badge {
+            padding: 0.5rem 1rem;
+            border-radius: 2rem;
+            font-size: 0.875rem;
+            font-weight: 600;
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(139, 92, 246, 0.1));
+            color: var(--primary);
+            border: 1px solid rgba(59, 130, 246, 0.2);
+        }
+
+        .favorite-btn {
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            padding: 0.5rem;
+            border-radius: 50%;
+        }
+
+        .favorite-btn:hover {
+            background: rgba(239, 68, 68, 0.1);
+            transform: scale(1.1);
+        }
+
+        .favorite-btn.active svg {
+            fill: #ef4444;
+            stroke: #ef4444;
+            animation: heartbeat 0.6s ease;
+        }
+
+        .quote-text {
+            font-size: 1.125rem;
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+            color: var(--text-dark);
+            position: relative;
+            z-index: 1;
+        }
+
+        .quote-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .author-name {
+            font-weight: 700;
+            font-size: 0.95rem;
+            color: var(--text-dark);
+        }
+
+        .likes-count {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--text-gray);
+            font-size: 0.875rem;
+        }
+
+        .likes-count svg {
+            fill: #ef4444;
+            stroke: #ef4444;
+        }
+
+        .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .tag {
+            padding: 0.375rem 0.875rem;
+            background: var(--bg-light);
+            border-radius: 1rem;
+            font-size: 0.8rem;
+            color: var(--text-gray);
+            transition: all 0.3s ease;
+        }
+
+        .tag:hover {
+            background: var(--gradient);
+            color: white;
+            transform: scale(1.05);
+        }
+
+        /* Modal */
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(8px);
+            z-index: 2000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 1.5rem;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+        }
+
+        .modal {
+            background: var(--bg-white);
+            border-radius: 2rem;
+            padding: 3rem;
+            max-width: 700px;
+            width: 100%;
+            position: relative;
+            box-shadow: 0 25px 80px rgba(0, 0, 0, 0.3);
+            animation: scaleIn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 1.5rem;
+            right: 1.5rem;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            padding: 0.5rem;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+            color: var(--text-dark);
+        }
+
+        .modal-close:hover {
+            background: var(--bg-light);
+            transform: rotate(90deg);
+        }
+
+        .modal-category {
+            display: inline-block;
+            padding: 0.625rem 1.5rem;
+            border-radius: 2rem;
+            font-size: 0.95rem;
+            font-weight: 600;
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.15), rgba(139, 92, 246, 0.15));
+            color: var(--primary);
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            margin-bottom: 2rem;
+        }
+
+        .modal-quote {
+            font-size: clamp(1.5rem, 4vw, 2rem);
+            line-height: 1.6;
+            margin-bottom: 2rem;
+            color: var(--text-dark);
+        }
+
+        .modal-author {
+            font-size: 1.375rem;
+            font-weight: 700;
+            margin-bottom: 2rem;
+            color: var(--text-dark);
+        }
+
+        .modal-actions {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border);
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 0.75rem;
+        }
+
+        .action-btn {
+            padding: 0.875rem;
+            border: none;
+            border-radius: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: var(--bg-light);
+            color: var(--text-dark);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .action-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 20px var(--shadow);
+        }
+
+        .action-btn.primary {
+            background: var(--gradient);
+            color: white;
+        }
+
+        .share-info {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            color: var(--text-gray);
+            font-size: 0.95rem;
+        }
+
+        /* Toast Notification */
+        .toast {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: var(--gradient);
+            color: white;
+            padding: 1rem 1.5rem;
+            border-radius: 1rem;
+            box-shadow: 0 10px 40px rgba(59, 130, 246, 0.4);
+            display: none;
+            align-items: center;
+            gap: 0.75rem;
+            animation: slideIn 0.4s ease;
+            z-index: 3000;
+        }
+
+        .toast.active {
+            display: flex;
+        }
+
+        /* Footer */
+        footer {
+            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+            color: white;
+            padding: 3rem 1.5rem;
+            text-align: center;
+        }
+
+        .footer-content {
+            max-width: 1280px;
+            margin: 0 auto;
+        }
+
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.75rem;
+            margin-bottom: 1rem;
+        }
+
+        .footer-logo-icon {
+            font-size: 2.5rem;
+        }
+
+        .footer-logo h3 {
+            font-size: 1.75rem;
+            font-weight: 800;
+        }
+
+        .footer-tagline {
+            color: #94a3b8;
+            margin-bottom: 1.5rem;
+            font-size: 1.125rem;
+        }
+
+        .footer-copyright {
+            color: #64748b;
+            font-size: 0.875rem;
+        }
+
+        /* Loading State */
+        .loading {
+            text-align: center;
+            padding: 3rem;
+            color: var(--text-gray);
+        }
+
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 4px solid var(--border);
+            border-top-color: var(--primary);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 1rem;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .quotes-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .hero {
+                padding: 3rem 1.5rem;
+            }
+
+            .modal {
+                padding: 2rem 1.5rem;
+            }
+
+            .modal-actions {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .action-buttons {
+                justify-content: center;
+            }
+        }
+
+        /* Smooth Scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 12px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--bg-light);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--gradient);
+            border-radius: 6px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--primary-dark);
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <div class="logo">
+                <div class="logo-icon"></div>
+                <div class="logo-text">
+                    <h1>zed.qoutes</h1>
+                    <p>Words That Touch The Soul</p>
+                </div>
+            </div>
+            <div class="nav-actions">
+                <button class="nav-btn" id="filterToggle" title="Toggle Filters">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="4" y1="21" x2="4" y2="14"></line>
+                        <line x1="4" y1="10" x2="4" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="12"></line>
+                        <line x1="12" y1="8" x2="12" y2="3"></line>
+                        <line x1="20" y1="21" x2="20" y2="16"></line>
+                        <line x1="20" y1="12" x2="20" y2="3"></line>
+                        <line x1="1" y1="14" x2="7" y2="14"></line>
+                        <line x1="9" y1="8" x2="15" y2="8"></line>
+                        <line x1="17" y1="16" x2="23" y2="16"></line>
+                    </svg>
+                </button>
+                <button class="nav-btn" id="themeToggle" title="Toggle Theme">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" id="sunIcon">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" id="moonIcon" style="display: none;">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h2>Discover Inspiring <span class="hero-gradient">Qoutes</span></h2>
+            <p>Words that touch the soul and inspire greatness</p>
+            
+            <div class="search-container">
+                <div class="search-wrapper">
+                    <svg class="search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <path d="m21 21-4.35-4.35"></path>
+                    </svg>
+                    <input type="text" class="search-input" id="searchInput" placeholder="Search quotes, authors, or tags...">
+                </div>
+            </div>
+
+            <button class="random-btn" id="randomBtn">✨ Get Random Qoute</button>
+        </div>
+    </section>
+
+    <!-- Category Filters -->
+    <div class="filters" id="filtersSection" style="display: none;">
+        <div class="filter-box">
+            <h3>Categories</h3>
+            <div class="category-grid" id="categoryGrid"></div>
+        </div>
+    </div>
+
+    <!-- Hit Quotes Section -->
+    <section class="section">
+        <div class="section-header">
+            <span class="section-icon"></span>
+            <h2>Hit Qoutes</h2>
+        </div>
+        <div class="quotes-grid" id="hitQuotes"></div>
+    </section>
+
+    <!-- Best Quotes Section -->
+    <section class="section">
+        <div class="section-header">
+            <span class="section-icon"></span>
+            <h2>Best Qoutes</h2>
+        </div>
+        <div class="quotes-grid" id="bestQuotes"></div>
+    </section>
+
+    <!-- Legendary Quotes Section -->
+    <section class="section">
+        <div class="section-header">
+            <span class="section-icon"></span>
+            <h2>Legendary Qoutes</h2>
+        </div>
+        <div class="quotes-grid" id="legendaryQuotes"></div>
+    </section>
+
+    <!-- All Quotes Section -->
+    <section class="section">
+        <div class="section-header">
+            <span class="section-icon"></span>
+            <h2 id="allQuotesTitle">All Quotes</h2>
+        </div>
+        <div class="quotes-grid" id="allQuotes"></div>
+    </section>
+
+    <!-- Modal -->
+    <div class="modal-overlay" id="modalOverlay">
+        <div class="modal">
+            <button class="modal-close" id="modalClose">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </button>
+            <div class="modal-category" id="modalCategory"></div>
+            <p class="modal-quote" id="modalQuote"></p>
+            <p class="modal-author" id="modalAuthor"></p>
+            <div class="tags" id="modalTags"></div>
+            <div class="modal-actions">
+                <div class="action-buttons">
+                    <button class="action-btn" id="modalFavorite">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                        </svg>
+                    </button>
+                    <button class="action-btn" id="modalCopy">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                        </svg>
+                    </button>
+                </div>
+                <div class="share-info">
+                    <button class="action-btn primary" id="modalShare">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="18" cy="5" r="3"></circle>
+                            <circle cx="6" cy="12" r="3"></circle>
+                            <circle cx="18" cy="19" r="3"></circle>
+                            <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line>
+                            <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line>
+                        </svg>
+                    </button>
+                    <span id="modalLikes"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div class="toast" id="toast">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="20 6 9 17 4 12"></polyline>
+        </svg>
+        <span id="toastMessage">Copied to clipboard!</span>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-logo">
+                <span class="footer-logo-icon"></span>
+                <h3>zed.quotes</h3>
+            </div>
+            <p class="footer-tagline">Words That Touch The Soul</p>
+            <p class="footer-copyright">© 2024 zed.qoutes. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Sample quotes data (simulating quotes.json)
+        const quotesData = [
+            {
+                id: 1,
+                quote: "The only way to do great work is to love what you do.",
+                author: "Steve Jobs",
+                category: "Motivational",
+                image: "https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=400",
+                likes: 1547,
+                tags: ["success", "passion", "work"]
+            },
+            {
+                id: 2,
+                quote: "Reality is wrong. Dreams are for real.",
+                author: "Tupac Shakur",
+                category: "Legendary",
+                image: "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=400",
+                likes: 2134,
+                tags: ["dreams", "reality", "legendary"]
+            },
+            {
+                id: 3,
+                quote: "One love, one heart, one destiny.",
+                author: "Bob Marley",
+                category: "Legendary",
+                image: "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=400",
+                likes: 1876,
+                tags: ["love", "unity", "legendary"]
+            },
+            {
+                id: 4,
+                quote: "The greatest glory in living lies not in never falling, but in rising every time we fall.",
+                author: "Nelson Mandela",
+                category: "Motivational",
+                image: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=400",
+                likes: 2345,
+                tags: ["resilience", "strength", "legendary"]
+            },
+            {
+                id: 5,
+                quote: "Love all, trust a few, do wrong to none.",
+                author: "William Shakespeare",
+                category: "Love",
+                image: "https://images.unsplash.com/photo-1474552226712-ac0f0961a954?w=400",
+                likes: 1234,
+                tags: ["love", "trust", "wisdom"]
+            },
+            {
+                id: 6,
+                quote: "The wound is the place where the Light enters you.",
+                author: "Rumi",
+                category: "Wisdom",
+                image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400",
+                likes: 1567,
+                tags: ["healing", "wisdom", "spiritual"]
+            },
+            {
+                id: 7,
+                quote: "Tears are words the heart can't express.",
+                author: "Unknown",
+                category: "Sad",
+                image: "https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?w=400",
+                likes: 987,
+                tags: ["emotions", "sadness", "feelings"]
+            },
+            {
+                id: 8,
+                quote: "Life is what happens when you're busy making other plans.",
+                author: "John Lennon",
+                category: "Life",
+                image: "https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?w=400",
+                likes: 1678,
+                tags: ["life", "planning", "reality"]
+            },
+            {
+                id: 9,
+                quote: "Be yourself; everyone else is already taken.",
+                author: "Oscar Wilde",
+                category: "Motivational",
+                image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400",
+                likes: 1432,
+                tags: ["authenticity", "self", "motivation"]
+            },
+            {
+                id: 10,
+                quote: "In three words I can sum up everything I've learned about life: it goes on.",
+                author: "Robert Frost",
+                category: "Life",
+                image: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=400",
+                likes: 1789,
+                tags: ["life", "wisdom", "perseverance"]
+            },
+            {
+                id: 11,
+                quote: "The best time to plant a tree was 20 years ago. The second best time is now.",
+                author: "Chinese Proverb",
+                category: "Wisdom",
+                image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=400",
+                likes: 2012,
+                tags: ["wisdom", "action", "timing"]
+            },
+            {
+                id: 12,
+                quote: "Love is not about how many days, months, or years you have been together. It's about how much you love each other every single day.",
+                author: "Unknown",
+                category: "Love",
+                image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400",
+                likes: 1321,
+                tags: ["love", "relationships", "devotion"]
+            },
+            {
+                id: 13,
+                quote: "The future belongs to those who believe in the beauty of their dreams.",
+                author: "Eleanor Roosevelt",
+                category: "Motivational",
+                image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400",
+                likes: 1890,
+                tags: ["dreams", "future", "belief"]
+            },
+            {
+                id: 14,
+                quote: "Don't cry because it's over, smile because it happened.",
+                author: "Dr. Seuss",
+                category: "Life",
+                image: "https://images.unsplash.com/photo-1463453091185-61582044d556?w=400",
+                likes: 1456,
+                tags: ["memories", "happiness", "life"]
+            },
+            {
+                id: 15,
+                quote: "It is during our darkest moments that we must focus to see the light.",
+                author: "Aristotle",
+                category: "Wisdom",
+                image: "https://images.unsplash.com/photo-1566492031773-4f4e44671857?w=400",
+                likes: 1723,
+                tags: ["hope", "darkness", "perseverance"]
+            },
+            {
+                id: 16,
+                quote: "Love looks not with the eyes, but with the mind.",
+                author: "William Shakespeare",
+                category: "Love",
+                image: "https://images.unsplash.com/photo-1511367461989-f85a21fda167?w=400",
+                likes: 1298,
+                tags: ["love", "perception", "romance"]
+            },
+            {
+                id: 17,
+                quote: "The only impossible journey is the one you never begin.",
+                author: "Tony Robbins",
+                category: "Motivational",
+                image: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=400",
+                likes: 1634,
+                tags: ["journey", "beginning", "possibility"]
+            },
+            {
+                id: 18,
+                quote: "Heavy hearts, like heavy clouds in the sky, are best relieved by the letting of a little water.",
+                author: "Christopher Morley",
+                category: "Sad",
+                image: "https://images.unsplash.com/photo-1513002749550-c59d786b8e6c?w=400",
+                likes: 876,
+                tags: ["sadness", "relief", "emotions"]
+            }
+        ];
+
+        // State management
+        let allQuotes = [];
+        let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+        let selectedCategory = 'All';
+        let searchTerm = '';
+        let currentModalQuote = null;
+
+        const categories = ['All', 'Motivational', 'Sad', 'Life', 'Love', 'Wisdom', 'Legendary'];
+
+        // Initialize app
+        function init() {
+            allQuotes = quotesData;
+            renderCategories();
+            renderHitQuotes();
+            renderBestQuotes();
+            renderLegendaryQuotes();
+            renderAllQuotes();
+            setupEventListeners();
+        }
+
+        // Render categories
+        function renderCategories() {
+            const categoryGrid = document.getElementById('categoryGrid');
+            categoryGrid.innerHTML = categories.map(cat => `
+                <button class="category-btn ${cat === selectedCategory ? 'active' : ''}" data-category="${cat}">
+                    ${cat}
+                </button>
+            `).join('');
+
+            // Add event listeners to category buttons
+            categoryGrid.querySelectorAll('.category-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    selectedCategory = btn.dataset.category;
+                    renderCategories();
+                    renderAllQuotes();
+                    updateAllQuotesTitle();
+                });
+            });
+        }
+
+        // Update all quotes title
+        function updateAllQuotesTitle() {
+            const title = document.getElementById('allQuotesTitle');
+            title.textContent = selectedCategory === 'All' ? 'All Quotes' : `${selectedCategory} Quotes`;
+        }
+
+        // Create quote card HTML
+        function createQuoteCard(quote) {
+            const isFavorite = favorites.includes(quote.id);
+            return `
+                <div class="quote-card" data-id="${quote.id}">
+                    <div class="card-header">
+                        <span class="category-badge">${quote.category}</span>
+                        <button class="favorite-btn ${isFavorite ? 'active' : ''}" data-id="${quote.id}">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                            </svg>
+                        </button>
+                    </div>
+                    <p class="quote-text">"${quote.quote}"</p>
+                    <div class="quote-footer">
+                        <p class="author-name">— ${quote.author}</p>
+                        <div class="likes-count">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                            </svg>
+                            <span>${quote.likes}</span>
+                        </div>
+                    </div>
+                    <div class="tags">
+                        ${quote.tags.map(tag => `<span class="tag">#${tag}</span>`).join('')}
+                    </div>
+                </div>
+            `;
+        }
+
+        // Render hit quotes (most liked)
+        function renderHitQuotes() {
+            const hitQuotes = [...allQuotes].sort((a, b) => b.likes - a.likes).slice(0, 6);
+            document.getElementById('hitQuotes').innerHTML = hitQuotes.map(createQuoteCard).join('');
+            attachCardListeners('hitQuotes');
+        }
+
+        // Render best quotes
+        function renderBestQuotes() {
+            const bestQuotes = allQuotes.slice(0, 6);
+            document.getElementById('bestQuotes').innerHTML = bestQuotes.map(createQuoteCard).join('');
+            attachCardListeners('bestQuotes');
+        }
+
+        // Render legendary quotes
+        function renderLegendaryQuotes() {
+            const legendaryQuotes = allQuotes.filter(q => q.category === 'Legendary');
+            document.getElementById('legendaryQuotes').innerHTML = legendaryQuotes.map(createQuoteCard).join('');
+            attachCardListeners('legendaryQuotes');
+        }
+
+        // Render all quotes with filters
+        function renderAllQuotes() {
+            let filtered = allQuotes;
+
+            // Apply category filter
+            if (selectedCategory !== 'All') {
+                filtered = filtered.filter(q => q.category === selectedCategory);
+            }
+
+            // Apply search filter
+            if (searchTerm) {
+                filtered = filtered.filter(q => 
+                    q.quote.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                    q.author.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                    q.tags.some(tag => tag.toLowerCase().includes(searchTerm.toLowerCase()))
+                );
+            }
+
+            const container = document.getElementById('allQuotes');
+            if (filtered.length === 0) {
+                container.innerHTML = '<div class="loading"><p>No quotes found. Try adjusting your filters.</p></div>';
+            } else {
+                container.innerHTML = filtered.map(createQuoteCard).join('');
+                attachCardListeners('allQuotes');
+            }
+        }
+
+        // Attach event listeners to quote cards
+        function attachCardListeners(containerId) {
+            const container = document.getElementById(containerId);
+            
+            // Card click listeners
+            container.querySelectorAll('.quote-card').forEach(card => {
+                card.addEventListener('click', (e) => {
+                    if (!e.target.closest('.favorite-btn')) {
+                        const id = parseInt(card.dataset.id);
+                        openModal(id);
+                    }
+                });
+            });
+
+            // Favorite button listeners
+            container.querySelectorAll('.favorite-btn').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    const id = parseInt(btn.dataset.id);
+                    toggleFavorite(id);
+                });
+            });
+        }
+
+        // Toggle favorite
+        function toggleFavorite(id) {
+            if (favorites.includes(id)) {
+                favorites = favorites.filter(fav => fav !== id);
+            } else {
+                favorites.push(id);
+            }
+            localStorage.setItem('favorites', JSON.stringify(favorites));
+            
+            // Re-render all sections
+            renderHitQuotes();
+            renderBestQuotes();
+            renderLegendaryQuotes();
+            renderAllQuotes();
+            
+            // Update modal if open
+            if (currentModalQuote && currentModalQuote.id === id) {
+                updateModalFavoriteButton();
+            }
+        }
+
+        // Open modal
+        function openModal(id) {
+            const quote = allQuotes.find(q => q.id === id);
+            if (!quote) return;
+
+            currentModalQuote = quote;
+            const isFavorite = favorites.includes(id);
+
+            document.getElementById('modalCategory').textContent = quote.category;
+            document.getElementById('modalQuote').textContent = `"${quote.quote}"`;
+            document.getElementById('modalAuthor').textContent = `— ${quote.author}`;
+            document.getElementById('modalTags').innerHTML = quote.tags.map(tag => 
+                `<span class="tag">#${tag}</span>`
+            ).join('');
+            document.getElementById('modalLikes').textContent = `${quote.likes} likes`;
+
+            const favoriteBtn = document.getElementById('modalFavorite');
+            if (isFavorite) {
+                favoriteBtn.classList.add('active');
+                favoriteBtn.innerHTML = `
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2">
+                        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                    </svg>
+                `;
+            } else {
+                favoriteBtn.classList.remove('active');
+                favoriteBtn.innerHTML = `
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                    </svg>
+                `;
+            }
+
+            document.getElementById('modalOverlay').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        // Close modal
+        function closeModal() {
+            document.getElementById('modalOverlay').classList.remove('active');
+            document.body.style.overflow = '';
+            currentModalQuote = null;
+        }
+
+        // Update modal favorite button
+        function updateModalFavoriteButton() {
+            if (!currentModalQuote) return;
+            const isFavorite = favorites.includes(currentModalQuote.id);
+            const favoriteBtn = document.getElementById('modalFavorite');
+            
+            if (isFavorite) {
+                favoriteBtn.classList.add('active');
+                favoriteBtn.innerHTML = `
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2">
+                        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                    </svg>
+                `;
+            } else {
+                favoriteBtn.classList.remove('active');
+                favoriteBtn.innerHTML = `
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                    </svg>
+                `;
+            }
+        }
+
+        // Show toast notification
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            const toastMessage = document.getElementById('toastMessage');
+            toastMessage.textContent = message;
+            toast.classList.add('active');
+            
+            setTimeout(() => {
+                toast.classList.remove('active');
+            }, 3000);
+        }
+
+        // Copy to clipboard
+        function copyToClipboard(text) {
+            navigator.clipboard.writeText(text).then(() => {
+                showToast('Copied to clipboard!');
+            }).catch(() => {
+                showToast('Failed to copy');
+            });
+        }
+
+        // Get random quote
+        function getRandomQuote() {
+            const randomIndex = Math.floor(Math.random() * allQuotes.length);
+            openModal(allQuotes[randomIndex].id);
+        }
+
+        // Setup event listeners
+        function setupEventListeners() {
+            // Theme toggle
+            document.getElementById('themeToggle').addEventListener('click', () => {
+                const html = document.documentElement;
+                const currentTheme = html.getAttribute('data-theme');
+                const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+                html.setAttribute('data-theme', newTheme);
+                localStorage.setItem('theme', newTheme);
+                
+                // Toggle icons
+                document.getElementById('sunIcon').style.display = newTheme === 'dark' ? 'none' : 'block';
+                document.getElementById('moonIcon').style.display = newTheme === 'dark' ? 'block' : 'none';
+            });
+
+            // Filter toggle
+            document.getElementById('filterToggle').addEventListener('click', () => {
+                const filtersSection = document.getElementById('filtersSection');
+                filtersSection.style.display = filtersSection.style.display === 'none' ? 'block' : 'none';
+            });
+
+            // Search input
+            document.getElementById('searchInput').addEventListener('input', (e) => {
+                searchTerm = e.target.value;
+                renderAllQuotes();
+            });
+
+            // Random button
+            document.getElementById('randomBtn').addEventListener('click', getRandomQuote);
+
+            // Modal close
+            document.getElementById('modalClose').addEventListener('click', closeModal);
+            document.getElementById('modalOverlay').addEventListener('click', (e) => {
+                if (e.target.id === 'modalOverlay') {
+                    closeModal();
+                }
+            });
+
+            // Modal actions
+            document.getElementById('modalFavorite').addEventListener('click', () => {
+                if (currentModalQuote) {
+                    toggleFavorite(currentModalQuote.id);
+                }
+            });
+
+            document.getElementById('modalCopy').addEventListener('click', () => {
+                if (currentModalQuote) {
+                    copyToClipboard(`"${currentModalQuote.quote}" — ${currentModalQuote.author}`);
+                }
+            });
+
+            document.getElementById('modalShare').addEventListener('click', () => {
+                if (currentModalQuote) {
+                    const text = `"${currentModalQuote.quote}" — ${currentModalQuote.author}`;
+                    if (navigator.share) {
+                        navigator.share({ text }).catch(() => {});
+                    } else {
+                        copyToClipboard(text);
+                    }
+                }
+            });
+
+            // Load saved theme
+            const savedTheme = localStorage.getItem('theme') || 'light';
+            document.documentElement.setAttribute('data-theme', savedTheme);
+            document.getElementById('sunIcon').style.display = savedTheme === 'dark' ? 'none' : 'block';
+            document.getElementById('moonIcon').style.display = savedTheme === 'dark' ? 'block' : 'none';
+        }
+
+        // Initialize the app when DOM is loaded
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', init);
+        } else {
+            init();
+        }
+    </script>
+</body>
+</html>
